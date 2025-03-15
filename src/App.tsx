@@ -88,12 +88,14 @@ function App() {
             </div>
 
             <div className="space-y-3 sm:space-y-6">
-              <div className="bg-white rounded-xl shadow-lg p-2 sm:p-4 md:p-6">
+              <div className="bg-white rounded-xl shadow-lg p-2 sm:p-4 md:p-6 h-full flex flex-col">
                 <h2 className="text-sm sm:text-base md:text-lg font-medium mb-2 sm:mb-4">Live Preview</h2>
-                <PreviewCard
-                  foregroundColor={foreground}
-                  backgroundColor={background}
-                />
+                <div className="flex-grow">
+                  <PreviewCard
+                    foregroundColor={foreground}
+                    backgroundColor={background}
+                  />
+                </div>
               </div>
             </div>
           </div>
