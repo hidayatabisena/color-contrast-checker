@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Copy } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ColorPicker } from './components/ColorPicker';
 import { PreviewCard } from './components/PreviewCard';
 import { ContrastScore } from './components/ContrastScore';
@@ -13,7 +15,19 @@ function App() {
   const contrastRatio = getContrastRatio(foreground, background);
 
   const copyColor = async (color: string) => {
-    await navigator.clipboard.writeText(color);
+    try {
+      await navigator.clipboard.writeText(color);
+      toast.success(`Copied ${color} to clipboard!`, {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } catch (error) {
+      toast.error("Failed to copy to clipboard");
+    }
   };
 
   const autoAdjust = () => {
@@ -102,6 +116,18 @@ function App() {
         </div>
       </div>
       <SponsorBox />
+      <ToastContainer 
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }
